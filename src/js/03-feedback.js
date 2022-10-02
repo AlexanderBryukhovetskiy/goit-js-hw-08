@@ -19,8 +19,15 @@ const inputFormData = {
     message: ""
 };
 
-inputEmail.value = parsedData.email || "";
-inputMessage.value = parsedData.message || "";
+if (!parsedData) {
+  inputEmail.value = "";
+  inputMessage.value = "";
+} else {
+
+inputMessage.value = parsedData.message;
+inputEmail.value = parsedData.email;
+}
+
 
 inputEmail.addEventListener('input', addData);
 inputMessage.addEventListener('input', addData);
@@ -29,7 +36,7 @@ inputMessage.addEventListener('input', addData);
 function addData(event) {
     inputFormData[this.name] = event.target.value;
     saveInLocalStorage();
- }
+}
 
  
 const saveInLocalStorage = throttle(function () {   
