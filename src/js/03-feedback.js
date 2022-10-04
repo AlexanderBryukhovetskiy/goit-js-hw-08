@@ -19,6 +19,8 @@ const inputFormData = {
     message: ""
 };
 
+
+//---------стара версія перевірки: 
 if (!parsedData) {
   inputEmail.value = "";
   inputMessage.value = "";
@@ -27,6 +29,16 @@ if (!parsedData) {
 inputMessage.value = parsedData.message;
 inputEmail.value = parsedData.email;
 }
+//---------
+
+// if (parsedData) {
+
+//   inputEmail.value = parsedData.email;
+//   inputMessage.value = parsedData.message;
+
+//   inputFormData.email = parsedData.email;
+//   inputFormData = parsedData.message;
+// }
 
 
 inputEmail.addEventListener('input', addData);
@@ -37,14 +49,13 @@ function addData(event) {
     inputFormData[this.name] = event.target.value;
     saveInLocalStorage();
 }
-
  
 const saveInLocalStorage = throttle(function () {   
     localStorage.setItem('feedback-form-state', JSON.stringify(inputFormData));
 }, 500);
 
 
-
+// додано перевірку для недопущення відправки форми з пустим полем
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     
@@ -57,6 +68,10 @@ form.addEventListener("submit", (event) => {
       message: message.value   
     };
   
+    if (email.value === "" ||  message.value === "") {
+      return alert("Please fill in all the fields!");
+    }
+
     console.log(userMessage);
 
     localStorage.clear();
