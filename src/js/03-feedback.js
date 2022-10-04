@@ -42,7 +42,7 @@ const saveInLocalStorage = throttle(function () {
 }, 500);
 
 
-// додано перевірку для недопущення відправки форми з пустим полем
+// відправка форми 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     
