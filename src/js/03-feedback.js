@@ -14,23 +14,19 @@ const inputMessage = document.querySelector("textarea[name = message]");
 
 const parsedData = JSON.parse(localStorage.getItem("feedback-form-state"));
 
-const inputFormData = parsedData || {};
+let inputFormData = parsedData || {};
 
 
-//---------стара версія перевірки: 
 if (!parsedData) {
   inputEmail.value = "";
   inputMessage.value = "";
 } else {
-
-inputMessage.value = parsedData.message;
-inputEmail.value = parsedData.email;
+  inputMessage.value = parsedData.message;
+  inputEmail.value = parsedData.email;
 }
-//---------
 
 inputEmail.addEventListener('input', addData);
 inputMessage.addEventListener('input', addData);
-
 
 function addData(event) {
     inputFormData[event.target.name] = event.target.value;
@@ -65,6 +61,6 @@ form.addEventListener("submit", (event) => {
 
     localStorage.clear();
 
-    inputEmail.value = "";
-    inputMessage.value = ""; 
-  });
+    inputFormData = {};
+   
+});
