@@ -38,7 +38,7 @@ const saveInLocalStorage = throttle(function () {
 }, 500);
 
 
-// відправка форми 
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     
