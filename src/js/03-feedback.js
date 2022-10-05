@@ -16,13 +16,9 @@ const parsedData = JSON.parse(localStorage.getItem("feedback-form-state"));
 
 let inputFormData = parsedData || {};
 
-
-if (!parsedData) {
-  inputEmail.value = "";
-  inputMessage.value = "";
-} else {
-  inputMessage.value = parsedData.message;
-  inputEmail.value = parsedData.email;
+if (parsedData) {
+  inputMessage.value = parsedData.message || "";
+  inputEmail.value = parsedData.email || "";
 }
 
 inputEmail.addEventListener('input', addData);
@@ -32,12 +28,10 @@ function addData(event) {
     inputFormData[event.target.name] = event.target.value;
     saveInLocalStorage();
 }
- 
+
 const saveInLocalStorage = throttle(function () {   
     localStorage.setItem('feedback-form-state', JSON.stringify(inputFormData));
 }, 500);
-
-
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -62,5 +56,4 @@ form.addEventListener("submit", (event) => {
     localStorage.clear();
 
     inputFormData = {};
-   
 });
